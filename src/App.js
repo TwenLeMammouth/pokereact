@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Navbar from "./NavBar"
+import PokeList from "./PokeList"
+import PokeInfo from "./PokeInfo"
 
-function App() {
+export default function App() {
+  const [pokeInfos, setPokeInfos] = useState(false);
+  const [currentPoke, setCurrentPoke] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar setPokeInfos={setPokeInfos} pokeInfos={pokeInfos}/>
+      <div className="App">
+        {!pokeInfos ? (
+          <PokeList
+          setPokeInfos={setPokeInfos}
+          pokeInfos={pokeInfos}
+          setCurrentPoke={setCurrentPoke}
+          currentPoke={currentPoke}
+          />
+        ) : (
+          <div>
+          <PokeList
+          setPokeInfos={setPokeInfos}
+          pokeInfos={pokeInfos}
+          setCurrentPoke={setCurrentPoke}
+          currentPoke={currentPoke}
+          />
+          <PokeInfo
+          setCurrentPoke={setCurrentPoke}
+          currentPoke={currentPoke}
+          />
+          </div>
+        )}
+        </div>
+
     </div>
   );
 }
 
-export default App;
+
